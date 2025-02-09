@@ -107,10 +107,12 @@ int main(int argc, char** argv) {
         t2 = MPI_Wtime();
 
         // Print the result
-        printf("The largest gap between two consecutive primes in the range 0 to %llu is %llu\n", N, global_max_gap);
-        printf("The primes flanking this gap are %llu and %llu\n", master_gap_prime1, master_gap_prime2);
-        printf("This was found in %f ticks using %i processes\n", t2-t1, size);
-        printf("ticks: %f\n", t2-t1);
+        if (rank == 0) {
+            printf("The largest gap between two consecutive primes in the range 0 to %llu is %llu\n", N, global_max_gap);
+            printf("The primes flanking this gap are %llu and %llu\n", master_gap_prime1, master_gap_prime2);
+            printf("This was found in %f ticks using %i processes\n", t2-t1, size);
+            printf("ticks: %f\n", t2-t1);
+        }
     }
 
     // Clean up variables
